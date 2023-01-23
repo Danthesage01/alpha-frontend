@@ -18,6 +18,7 @@ const TalksPage = () => {
   const [formData, setFormData] = useState(initialState);
   const [talks, setTalks] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+  // eslint-disable-next-line
   const [errorMSG, setErrorMSG] = useState("");
 
   const handleChange = (e) => {
@@ -37,7 +38,7 @@ const TalksPage = () => {
       setTalks(res.data.talks);
       setIsLoading(false);
     } catch (error) {
-      console.log(error)
+      console.log(error);
       setIsLoading(false);
       setErrorMSG(error.response.data.msg);
     }
@@ -141,7 +142,7 @@ const TalksPage = () => {
         ) : (
           <div className="talks">
             {talks.length <= 0 ? (
-              <div className="empty-list">{errorMSG}</div>
+              <div className="empty-list">No talk added yet.</div>
             ) : (
               talks.map((talk) => {
                 const { _id: talkId, title, speaker } = talk;

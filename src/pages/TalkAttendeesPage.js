@@ -17,6 +17,7 @@ const TalkAttendeesPage = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [singleTalk, setSingleTalk] = useState({});
   const [talkAttendees, setTalkAttendees] = useState([]);
+  // eslint-disable-next-line
   const [errorMSG, setErrorMSG] = useState("");
   const { talkId } = useParams();
 
@@ -46,8 +47,9 @@ const TalkAttendeesPage = () => {
 
   useEffect(() => {
     getSingleTalk();
+    // eslint-disable-next-line
   }, []);
-
+  // eslint-disable-next-line
   const { title, speaker, capacity, _id: id } = singleTalk;
 
   const getAllAttendeesToTalk = async () => {
@@ -64,6 +66,7 @@ const TalkAttendeesPage = () => {
 
   useEffect(() => {
     getAllAttendeesToTalk();
+    // eslint-disable-next-line
   }, []);
 
   const addAttendeeToTalk = async () => {
@@ -86,10 +89,6 @@ const TalkAttendeesPage = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // if (!name === "" || !email ) {
-    //   toast.error("Please fill the empty fields");
-    //   return;
-    // }
     addAttendeeToTalk();
     setFormData((prev) => {
       return {
@@ -152,7 +151,9 @@ const TalkAttendeesPage = () => {
         ) : (
           <div className="talks">
             {talkAttendees.length < 1 ? (
-              <div className="empty-list">{errorMSG}</div>
+              <div className="empty-list">
+                No attendee added to this talk yet.
+              </div>
             ) : (
               talkAttendees.map((attendee) => {
                 const { _id: attendeeId, name, email } = attendee;

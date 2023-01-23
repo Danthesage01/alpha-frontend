@@ -15,6 +15,7 @@ const AttendeesPage = () => {
   const [formData, setFormData] = useState(initialState);
   const [attendees, setAttendees] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+  // eslint-disable-next-line
   const [errorMSG, setErrorMSG] = useState("");
 
   const handleChange = (e) => {
@@ -128,7 +129,7 @@ const AttendeesPage = () => {
         ) : (
           <div className="talks">
             {attendees.length < 1 ? (
-              <div className="empty-list">{errorMSG}</div>
+              <div className="empty-list">No attendee added yet.</div>
             ) : (
               attendees.map((attendee) => {
                 const { _id: attendeeId, name, email, talkTitle } = attendee;

@@ -126,7 +126,7 @@ small,
 }
 
 h2 {
-  margin-top: 3rem;
+  margin-top: 2rem;
 }
 ul {
   padding: 0;
@@ -599,6 +599,13 @@ form > :last-child {
   text-align: center;
   margin-top: 1rem;
 }
+
+.Toastify__toast {
+  text-transform: capitalize;
+  font-size: 0.8rem;
+}
+
+
 @media screen and (min-width: 576px) {
   .back-link2 {
     margin: 1.5rem auto;
@@ -606,7 +613,7 @@ form > :last-child {
   .link2 {
     font-size: 1rem;
   }
+  .Toastify__toast {
+  font-size: 1rem;
 }
-.Toastify__toast {
-  text-transform: capitalize;
 }
