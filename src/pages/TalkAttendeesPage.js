@@ -6,7 +6,7 @@ import { URL, config } from "../utils/utils";
 import Loader from "../components/Loader";
 import axios from "axios";
 import { toast } from "react-toastify";
-
+import AtteendeeCard from "../components/AtteendeeCard";
 
 const initialState = {
   name: "",
@@ -156,17 +156,13 @@ const TalkAttendeesPage = () => {
               </div>
             ) : (
               talkAttendees.map((attendee) => {
-                const { _id: attendeeId, name, email } = attendee;
+                const { _id: attendeeId } = attendee;
+
                 return (
-                  <div
-                    className="single-attendee"
+                  <AtteendeeCard
                     key={attendeeId}
-                  >
-                    <div>
-                      <p className="attendee-name">{name}</p>
-                      <p className="attendee-email">{email}</p>
-                    </div>
-                  </div>
+                    attendee={attendee}
+                  />
                 );
               })
             )}

@@ -2,10 +2,10 @@ import React, { useState, useEffect } from "react";
 import { PageLink } from "../components/PageLink";
 import axios from "axios";
 import FormRow from "../components/FormRow";
-import { FaTrash } from "react-icons/fa";
 import { URL, config } from "../utils/utils";
 import Loader from "../components/Loader";
 import { toast } from "react-toastify";
+import AtteendeeCard from "../components/AtteendeeCard";
 
 const initialState = {
   name: "",
@@ -132,27 +132,8 @@ const AttendeesPage = () => {
               <div className="empty-list">No attendee added yet.</div>
             ) : (
               attendees.map((attendee) => {
-                const { _id: attendeeId, name, email, talkTitle } = attendee;
-                return (
-                  <div
-                    className="single-attendee"
-                    key={attendeeId}
-                  >
-                    <div>
-                      <p className="attendee-title">
-                        {talkTitle && `${talkTitle}`}
-                      </p>
-                      <p className="attendee-name">{name}</p>
-                      <p className="attendee-email">{email}</p>
-                    </div>
-                    <div
-                      className="talk-trash"
-                      onClick={() => deleteAnAttendee(attendeeId)}
-                    >
-                      <FaTrash />
-                    </div>
-                  </div>
-                );
+                const { _id: attendeeId } = attendee;
+                return <AtteendeeCard key={attendeeId} attendee={attendee} deleteAnAttendee={deleteAnAttendee} />
               })
             )}
           </div>

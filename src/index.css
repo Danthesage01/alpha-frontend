@@ -417,8 +417,8 @@ form > :last-child {
 }
 
 .talk-title {
-  max-width: 250px;
-  font-size: 1rem;
+  max-width: 220px;
+  font-size: 0.875rem;
   text-transform: capitalize;
 }
 .talk-speaker {
@@ -593,5 +593,9 @@ form > :last-child {
   .loading {
     width: 6rem;
     height: 6rem;
+  }
+  .talk-title {
+    max-width: 500px;
+    font-size: 1rem;
   }
 }

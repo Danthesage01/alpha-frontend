@@ -2,11 +2,10 @@ import React, { useEffect, useState } from "react";
 import { PageLink } from "../components/PageLink";
 import FormRow from "../components/FormRow";
 import axios from "axios";
-import { FaTrash } from "react-icons/fa";
 import { URL, config } from "../utils/utils";
 import Loader from "../components/Loader";
-import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
+import TalkCard from "../components/TalkCard";
 
 const initialState = {
   title: "",
@@ -141,36 +140,17 @@ const TalksPage = () => {
           <Loader />
         ) : (
           <div className="talks">
-            {talks.length <= 0 ? (
+            {talks.length < 1 ? (
               <div className="empty-list">No talk added yet.</div>
             ) : (
               talks.map((talk) => {
-                const { _id: talkId, title, speaker } = talk;
+                const { _id: talkId } = talk;
                 return (
-                  <div
-                    className="single-talk"
+                  <TalkCard
                     key={talkId}
-                  >
-                    <div className="single-talk-content">
-                      <div>
-                        <p className="talk-title">{title}</p>
-                        <p className="talk-speaker">{speaker}</p>
-                      </div>
-                      <div
-                        className="talk-trash"
-                        onClick={() => deleteTalk(talkId)}
-                      >
-                        <FaTrash />
-                      </div>
-                    </div>
-
-                    <Link
-                      to={`/talks/${talkId}`}
-                      className="link-btn"
-                    >
-                      Add Attendee
-                    </Link>
-                  </div>
+                    talk={talk}
+                    deleteTalk={deleteTalk}
+                  />
                 );
               })
             )}
