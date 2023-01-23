@@ -68,10 +68,7 @@
     0 10px 10px -5px rgba(0, 0, 0, 0.04);
 }
 
-/* html {
-  font-size: 112.5%;
-} */
-*{
+* {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
@@ -87,7 +84,7 @@ body {
 
 p {
   margin-bottom: 1.5rem;
-  max-width: 40em;
+  max-width: 40rem;
 }
 
 h1,
@@ -127,11 +124,7 @@ small,
 .text-small {
   font-size: var(--smallText);
 }
-h2,
-h3,
-h4 {
-  text-align: center;
-}
+
 h2 {
   margin-top: 3rem;
 }
@@ -143,9 +136,26 @@ a {
   text-decoration: none;
 }
 /*************
-     Buttons 
+   Wrappers
 *************/
 
+.div-wrapper {
+  width: 90vw;
+  max-width: var(--fixed-width);
+  margin: 0 auto;
+}
+
+.home-wrapper {
+  text-align: center;
+  margin-bottom: -0.8rem;
+}
+.page-link-wrapper{
+  display:  flex;
+}
+
+/*************
+     Buttons 
+*************/
 .btn {
   cursor: pointer;
   appearance: none;
@@ -181,17 +191,34 @@ button.hipster:hover {
 button.block {
   width: 100%;
 }
+.link-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  width: 9rem;
+  height: 2.1rem;
+  font-size: 0.875rem;
+  margin: 0 auto;
+  margin-top: 1rem;
+  color: var(--white);
+  background: var(--alpha-main);
+  border-radius: var(--borderRadius);
+  letter-spacing: var(--letterSpacing);
+  text-align: center;
+}
 
 /*************
      FORM 
 *************/
+
 form {
   width: 100%;
   background: var(--white);
   border-radius: var(--borderRadius);
   box-shadow: var(--shadow-2);
   padding: 2rem 2.5rem;
-  color: var(--black);
+  color: var(--alpha-main);
 }
 label {
   display: block;
@@ -247,13 +274,15 @@ textarea {
   font-size: 0.75rem;
 }
 .talk-label {
-  /* padding-right: 1rem; */
   font-size: 0.75rem;
   margin-bottom: 0;
 }
 .submit-btn {
   width: 100%;
   margin-top: 1rem;
+}
+.talk-details{
+  text-align: center;
 }
 @media screen and (min-width: 576px) {
   h1 {
@@ -292,19 +321,22 @@ textarea {
     font-size: 0.875rem;
   }
   .talk-label {
-    /* padding-right: 1rem; */
     font-size: 1rem;
   }
   .submit-btn {
     display: block;
     width: 8rem;
     height: 2.1rem;
-    font-size: 1.3rem;
+    font-size: 1rem;
     margin: 0 auto;
     margin-top: 1rem;
+    text-transform: uppercase;
   }
   .talk-form h4 {
     margin-bottom: 1rem;
+  }
+  .home-wrapper {
+    margin-bottom: 0;
   }
 }
 form > :first-child {
@@ -391,6 +423,8 @@ form > :last-child {
 *************/
 .empty-list {
   text-align: center;
+  font-size: 1rem;
+  color: var(--white);
 }
 .talks-container {
   width: 100%;
@@ -404,6 +438,7 @@ form > :last-child {
   color: var(--alpha-main);
   gap: 1rem;
 }
+
 .talk-title {
   max-width: 250px;
   font-size: 1rem;
@@ -411,7 +446,22 @@ form > :last-child {
 }
 .talk-speaker {
   font-style: italic;
+  font-weight: bold;
   font-size: 0.875rem;
+  text-transform: capitalize;
+}
+.attendee-name{
+  text-transform: capitalize;
+}
+
+.attendee-title{
+  font-weight: bold;
+    text-transform: capitalize;
+}
+.attendee-email{
+  text-transform: lowercase;
+  font-style: italic;
+  font-size: 0.75rem;
   font-weight: bold;
 }
 .talk-trash {
@@ -424,37 +474,41 @@ form > :last-child {
   border-radius: var(--borderRadius);
   box-shadow: var(--shadow-2);
   transition: var(--transition);
+}
+.single-attendee {
+  padding: 1rem 2.5rem;
+  background: var(--white);
+  border-radius: var(--borderRadius);
+  box-shadow: var(--shadow-2);
+  transition: var(--transition);
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
-.single-talk:hover {
+.single-talk-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.single-talk:hover,
+.single-attendee:hover {
   box-shadow: var(--shadow-4);
 }
-.single-talk h5 {
+.single-talk h5,
+.single-attendee h5 {
   margin-bottom: 0;
 }
-.single-talk span {
+.single-talk span,
+.single-attendee span {
   display: inline-block;
   width: 0.5rem;
   height: 0.5rem;
   margin-left: -1.25rem;
   margin-right: 1.5rem;
 }
-.single-talk .fa-check-circle {
-  font-size: 1rem;
-  color: var(--green-dark);
-  visibility: hidden;
-}
-.talk-completed h5 {
-  text-decoration: line-through;
-}
-.talk-completed .fa-check-circle {
-  visibility: visible;
-}
-.loading-text {
-  visibility: hidden;
-}
+
+
+
 /* Talk Links */
 .talk-links {
   display: flex;
@@ -495,9 +549,7 @@ form > :last-child {
   font-size: 1rem;
 }
 
-.talk-edit-completed {
-  width: auto;
-}
+
 .back-link {
   width: 15rem;
   height: 3rem;
@@ -506,17 +558,14 @@ form > :last-child {
   margin-top: 5rem;
   font-size: 1rem;
 }
-/* .back-link:hover {
-  background: var(--alpha-main);
-  color: var(--white);
-} */
+
 .back-link2 {
   width: 15rem;
   height: 3rem;
-  margin: 0 auto;
+  margin: 0.7rem auto;
   text-align: center;
-  margin-top: 2rem;
 }
+
 .back-link2:hover {
   background: var(--alpha-main);
   color: var(--white);
@@ -534,12 +583,12 @@ form > :last-child {
 }
 .link:hover {
   color: var(--white);
-  text-decoration: underline;
-  text-decoration-color: var(--primary-500);
+  border-bottom: 3px solid var(--primary-500);
   background: var(--alpha-main);
 }
 .link2 {
   color: var(--white);
+  font-size: 0.875rem;
   border-bottom: 3px solid var(--white);
 }
 .link2:hover {
@@ -549,4 +598,15 @@ form > :last-child {
 .single-talk-form .form-alert {
   text-align: center;
   margin-top: 1rem;
+}
+@media screen and (min-width: 576px) {
+  .back-link2 {
+    margin: 1.5rem auto;
+  }
+  .link2 {
+    font-size: 1rem;
+  }
+}
+.Toastify__toast {
+  text-transform: capitalize;
 }

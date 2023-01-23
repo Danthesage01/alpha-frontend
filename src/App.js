@@ -7,36 +7,46 @@ import {
   TalksPage,
   AllPages,
 } from "./pages";
+import SharedLayout from "./pages/SharedLayout";
+import {ToastContainer} from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function App() {
   return (
-    <React.Fragment>
-      <Router>
-        <h2>Welcome to Alpha Gaps Conference</h2>
-        <Routes>
+    <Router>
+      <Routes>
+        <Route
+          path="/"
+          element={<SharedLayout />}
+        >
           <Route
-            path="/"
+            index
             element={<AllPages />}
           />
           <Route
-            path="/talks"
+            path="talks"
             element={<TalksPage />}
           />
           <Route
-            path="attendee-to-talk"
+            path="talks/:talkId"
             element={<TalkAttendeesPage />}
           />
           <Route
             path="attendees"
             element={<AttendeesPage />}
           />
-          <Route
-            path="*"
-            element={<ErrorPage />}
-          />
-        </Routes>
-      </Router>
-    </React.Fragment>
+        </Route>
+        <Route
+          path="*"
+          element={<ErrorPage />}
+        />
+      </Routes>
+
+      <ToastContainer
+        position="top-center"
+        autoClose={4000}
+      />
+    </Router>
   );
 }
 

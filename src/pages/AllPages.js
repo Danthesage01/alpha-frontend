@@ -5,8 +5,7 @@ const AllPages = () => {
   return (
     <div className="homepage">
       <PageLinkHome link="/talks">Click to Add Talks</PageLinkHome>
-      <PageLinkHome link="/attendees">Click to add Attendees</PageLinkHome>
-      <PageLinkHome link="/attendee-to-talk">Click to add attendees to a talk</PageLinkHome>
+      <PageLinkHome link="/attendees">Click to Add Attendees</PageLinkHome>
     </div>
   );
 };

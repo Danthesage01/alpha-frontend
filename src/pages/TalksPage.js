@@ -5,6 +5,8 @@ import axios from "axios";
 import { FaTrash } from "react-icons/fa";
 import { URL, config } from "../utils/utils";
 import Loader from "../components/Loader";
+import { Link } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const initialState = {
   title: "",
@@ -16,6 +18,7 @@ const TalksPage = () => {
   const [formData, setFormData] = useState(initialState);
   const [talks, setTalks] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [errorMSG, setErrorMSG] = useState("");
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -34,8 +37,9 @@ const TalksPage = () => {
       setTalks(res.data.talks);
       setIsLoading(false);
     } catch (error) {
-      console.log(error);
+      console.log(error)
       setIsLoading(false);
+      setErrorMSG(error.response.data.msg);
     }
   };
 
@@ -55,10 +59,11 @@ const TalksPage = () => {
       setIsLoading(false);
       if (response.data.status === 201) {
         getAllTalks();
+        toast.success(response.data.msg);
       }
     } catch (error) {
-      console.log(error);
       setIsLoading(false);
+      toast.error(error.response.data.msg);
     }
   };
 
@@ -76,15 +81,16 @@ const TalksPage = () => {
   };
 
   const deleteTalk = async (id) => {
-    console.log("deleted", id);
     try {
-      const res = await axios.delete(`${URL}/talks/${id}`);
-      if (res.data) {
-        console.log(res.data, res.data.msg);
-        getAllTalks()
+      if (window.confirm("Are you sure?")) {
+        const res = await axios.delete(`${URL}/talks/${id}`);
+        getAllTalks();
+        toast.success(res.data.msg);
+      } else {
+        toast.info("You chose to retain this talk");
       }
     } catch (error) {
-      console.log(error)
+      toast.error(error.response.data.msg);
     }
   };
   return (
@@ -134,26 +140,39 @@ const TalksPage = () => {
           <Loader />
         ) : (
           <div className="talks">
-            {talks.map((talk) => {
-              const { _id: talkId, title, speaker, capacity } = talk;
-              return (
-                <div
-                  className="single-talk"
-                  key={talkId}
-                >
-                  <div>
-                    <p className="talk-title">{title}</p>
-                    <p className="talk-speaker">{speaker}</p>
-                  </div>
+            {talks.length <= 0 ? (
+              <div className="empty-list">{errorMSG}</div>
+            ) : (
+              talks.map((talk) => {
+                const { _id: talkId, title, speaker } = talk;
+                return (
                   <div
-                    className="talk-trash"
-                    onClick={() => deleteTalk(talkId)}
+                    className="single-talk"
+                    key={talkId}
                   >
-                    <FaTrash />
+                    <div className="single-talk-content">
+                      <div>
+                        <p className="talk-title">{title}</p>
+                        <p className="talk-speaker">{speaker}</p>
+                      </div>
+                      <div
+                        className="talk-trash"
+                        onClick={() => deleteTalk(talkId)}
+                      >
+                        <FaTrash />
+                      </div>
+                    </div>
+
+                    <Link
+                      to={`/talks/${talkId}`}
+                      className="link-btn"
+                    >
+                      Add Attendee
+                    </Link>
                   </div>
-                </div>
-              );
-            })}
+                );
+              })
+            )}
           </div>
         )}
       </div>

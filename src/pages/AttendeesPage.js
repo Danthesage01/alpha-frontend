@@ -5,6 +5,7 @@ import FormRow from "../components/FormRow";
 import { FaTrash } from "react-icons/fa";
 import { URL, config } from "../utils/utils";
 import Loader from "../components/Loader";
+import { toast } from "react-toastify";
 
 const initialState = {
   name: "",
@@ -14,6 +15,7 @@ const AttendeesPage = () => {
   const [formData, setFormData] = useState(initialState);
   const [attendees, setAttendees] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [errorMSG, setErrorMSG] = useState("");
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -34,6 +36,7 @@ const AttendeesPage = () => {
     } catch (error) {
       console.log(error);
       setIsLoading(false);
+      setErrorMSG(error.response.data.msg);
     }
   };
 
@@ -52,10 +55,11 @@ const AttendeesPage = () => {
       setIsLoading(false);
       if (response.data.status === 201) {
         getAllAttendees();
+        toast.success(response.data.msg);
       }
     } catch (error) {
-      console.log(error);
       setIsLoading(false);
+      toast.error(error.response.data.msg);
     }
   };
 
@@ -71,16 +75,17 @@ const AttendeesPage = () => {
     });
   };
 
-  const deleteAnAttendee = async (id) => {
-    console.log("I am deleting you", id);
-      try {
-      const res = await axios.delete(`${URL}/attendees/${id}`);
-      if (res.data) {
-        console.log(res.data, res.data.msg);
-        getAllAttendees()
+  const deleteAnAttendee = async (attendeeId) => {
+    try {
+      if (window.confirm("Are you sure?")) {
+        const res = await axios.delete(`${URL}/attendees/${attendeeId}`);
+        getAllAttendees();
+        toast.success(res.data.msg);
+      } else {
+        toast.info("You chose to retain this attendee");
       }
     } catch (error) {
-      console.log(error)
+      toast.error(error.response.data.msg);
     }
   };
 
@@ -111,8 +116,9 @@ const AttendeesPage = () => {
           type="submit"
           onClick={handleSubmit}
           className="btn submit-btn"
+          disabled={isLoading && true}
         >
-          Submit
+          {isLoading ? "loading..." : "Submit"}
         </button>
       </form>
       <div className="talks-container">
@@ -121,26 +127,33 @@ const AttendeesPage = () => {
           <Loader />
         ) : (
           <div className="talks">
-            {attendees.map((attendee) => {
-              const { _id: attendeeId, name, email } = attendee;
-              return (
-                <div
-                  className="single-talk"
-                  key={attendeeId}
-                >
-                  <div>
-                    <p className="talk-title">{name}</p>
-                    <p className="talk-speaker">{email}</p>
-                  </div>
+            {attendees.length < 1 ? (
+              <div className="empty-list">{errorMSG}</div>
+            ) : (
+              attendees.map((attendee) => {
+                const { _id: attendeeId, name, email, talkTitle } = attendee;
+                return (
                   <div
-                    className="talk-trash"
-                    onClick={() => deleteAnAttendee(attendeeId)}
+                    className="single-attendee"
+                    key={attendeeId}
                   >
-                    <FaTrash />
+                    <div>
+                      <p className="attendee-title">
+                        {talkTitle && `${talkTitle}`}
+                      </p>
+                      <p className="attendee-name">{name}</p>
+                      <p className="attendee-email">{email}</p>
+                    </div>
+                    <div
+                      className="talk-trash"
+                      onClick={() => deleteAnAttendee(attendeeId)}
+                    >
+                      <FaTrash />
+                    </div>
                   </div>
-                </div>
-              );
-            })}
+                );
+              })
+            )}
           </div>
         )}
       </div>
