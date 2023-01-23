@@ -149,8 +149,8 @@ a {
   text-align: center;
   margin-bottom: -0.8rem;
 }
-.page-link-wrapper{
-  display:  flex;
+.page-link-wrapper {
+  display: flex;
 }
 
 /*************
@@ -280,8 +280,13 @@ textarea {
 .submit-btn {
   width: 100%;
   margin-top: 1rem;
+  height: 2.1rem;
+  text-transform: uppercase;
 }
-.talk-details{
+.submit-btn:hover {
+  border-bottom: 3px solid var(--primary-500);
+}
+.talk-details {
   text-align: center;
 }
 @media screen and (min-width: 576px) {
@@ -327,11 +332,12 @@ textarea {
     display: block;
     width: 8rem;
     height: 2.1rem;
+    text-transform: uppercase;
     font-size: 1rem;
     margin: 0 auto;
     margin-top: 1rem;
-    text-transform: uppercase;
   }
+
   .talk-form h4 {
     margin-bottom: 1rem;
   }
@@ -375,8 +381,8 @@ form > :last-child {
 }
 
 .loading {
-  width: 6rem;
-  height: 6rem;
+  width: 4rem;
+  height: 4rem;
   border-radius: 50%;
   border: 3px solid #ccc;
   border-top-color: var(--clr-primary-5);
@@ -387,35 +393,6 @@ form > :last-child {
 }
 .loading p {
   text-align: center;
-}
-/* form loading */
-
-.form-loading {
-  position: relative;
-}
-.form-loading::before {
-  background: var(--white);
-  position: absolute;
-  content: "";
-  height: 100%;
-  width: 100%;
-  top: 0;
-  left: 0;
-  border-radius: var(--borderRadius);
-  opacity: 0.8;
-}
-
-.form-loading::after {
-  content: "";
-  position: absolute;
-  top: calc(50% - 3rem);
-  left: calc(50% - 3rem);
-  width: 6rem;
-  height: 6rem;
-  border-radius: 50%;
-  border: 3px solid #ccc;
-  border-top-color: var(--clr-primary-5);
-  animation: spinner 0.6s linear infinite;
 }
 
 /*************
@@ -450,15 +427,15 @@ form > :last-child {
   font-size: 0.875rem;
   text-transform: capitalize;
 }
-.attendee-name{
+.attendee-name {
   text-transform: capitalize;
 }
 
-.attendee-title{
+.attendee-title {
   font-weight: bold;
-    text-transform: capitalize;
+  text-transform: capitalize;
 }
-.attendee-email{
+.attendee-email {
   text-transform: lowercase;
   font-style: italic;
   font-size: 0.75rem;
@@ -507,8 +484,6 @@ form > :last-child {
   margin-right: 1.5rem;
 }
 
-
-
 /* Talk Links */
 .talk-links {
   display: flex;
@@ -548,7 +523,6 @@ form > :last-child {
   margin-bottom: 0;
   font-size: 1rem;
 }
-
 
 .back-link {
   width: 15rem;
@@ -605,7 +579,6 @@ form > :last-child {
   font-size: 0.8rem;
 }
 
-
 @media screen and (min-width: 576px) {
   .back-link2 {
     margin: 1.5rem auto;
@@ -614,6 +587,11 @@ form > :last-child {
     font-size: 1rem;
   }
   .Toastify__toast {
-  font-size: 1rem;
-}
+    font-size: 1rem;
+  }
+
+  .loading {
+    width: 6rem;
+    height: 6rem;
+  }
 }
