@@ -6,7 +6,7 @@ import { URL, config } from "../utils/utils";
 import Loader from "../components/Loader";
 import axios from "axios";
 import { toast } from "react-toastify";
-import AtteendeeCard from "../components/AtteendeeCard";
+import AtteendeeCard from "../components/AttendeeCard";
 
 const initialState = {
   name: "",

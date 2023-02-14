@@ -1,7 +1,7 @@
 import React from "react";
 import { FaTrash } from "react-icons/fa";
 
-const AtteendeeCard = ({ attendee, deleteAnAttendee }) => {
+const AttendeeCard = ({ attendee, deleteAnAttendee }) => {
   const { _id: attendeeId, name, email, talkTitle } = attendee;
   return (
     <div
@@ -27,4 +27,4 @@ const AtteendeeCard = ({ attendee, deleteAnAttendee }) => {
   );
 };
 
-export default AtteendeeCard;
+export default AttendeeCard;

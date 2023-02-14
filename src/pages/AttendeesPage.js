@@ -5,7 +5,7 @@ import FormRow from "../components/FormRow";
 import { URL, config } from "../utils/utils";
 import Loader from "../components/Loader";
 import { toast } from "react-toastify";
-import AtteendeeCard from "../components/AtteendeeCard";
+import AttendeeCard from "../components/AttendeeCard";
 
 const initialState = {
   name: "",
@@ -133,7 +133,13 @@ const AttendeesPage = () => {
             ) : (
               attendees.map((attendee) => {
                 const { _id: attendeeId } = attendee;
-                return <AtteendeeCard key={attendeeId} attendee={attendee} deleteAnAttendee={deleteAnAttendee} />
+                return (
+                  <AttendeeCard
+                    key={attendeeId}
+                    attendee={attendee}
+                    deleteAnAttendee={deleteAnAttendee}
+                  />
+                );
               })
             )}
           </div>
